@@ -1,4 +1,5 @@
 import Html exposing(..)
+import Html.Attributes exposing(..)
 import Set exposing(..)
 
 import GuiView exposing(..)
@@ -9,6 +10,7 @@ main =
     ,  view = view
     ,  update = update
     }
+
 
 type Msg = NoMsg
 
@@ -39,7 +41,7 @@ model =
   }
 
 view model =
-  div[]
+  div[ class ""]
     [  mainContainer model
     ]
 

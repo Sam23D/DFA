@@ -8278,38 +8278,19 @@ var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$styl
 
 var _user$project$GuiView$textInput = A2(
 	_elm_lang$html$Html$input,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('topcoat-text-input'),
-		_1: {
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$type_('text'),
-			_1: {ctor: '[]'}
-		}
-	},
+	{ctor: '[]'},
 	{ctor: '[]'});
-var _user$project$GuiView$tab = function (label) {
+var _user$project$GuiView$tab = function (labelText) {
 	return A2(
-		_elm_lang$html$Html$div,
+		_elm_lang$html$Html$button,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('topcoat-button-bar__item'),
+			_0: _elm_lang$html$Html_Attributes$class('ui button'),
 			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$button,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('topcoat-button-bar__button--large'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(label),
-					_1: {ctor: '[]'}
-				}),
+			_0: _elm_lang$html$Html$text(labelText),
 			_1: {ctor: '[]'}
 		});
 };
@@ -8318,11 +8299,37 @@ var _user$project$GuiView$tabs = function (labels) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('topcoat-button-bar'),
+			_0: _elm_lang$html$Html_Attributes$class('ui buttons'),
 			_1: {ctor: '[]'}
 		},
 		A2(_elm_lang$core$List$map, _user$project$GuiView$tab, labels));
 };
+var _user$project$GuiView$dfaView = A2(
+	_elm_lang$html$Html$div,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$h4,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Deterministic Finite Automaton'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$input,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$placeholder('Current Word'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {ctor: '[]'}
+		}
+	});
 var _user$project$GuiView$sideBar = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -8332,29 +8339,54 @@ var _user$project$GuiView$sideBar = function (model) {
 			_0: _user$project$GuiView$tabs(
 				{
 					ctor: '::',
-					_0: 'main',
+					_0: 'Atutomata',
 					_1: {
 						ctor: '::',
-						_0: 'configuracion',
+						_0: 'Configuration',
 						_1: {ctor: '[]'}
 					}
 				}),
 			_1: {
 				ctor: '::',
-				_0: _user$project$GuiView$textInput,
+				_0: _user$project$GuiView$dfaView,
 				_1: {ctor: '[]'}
 			}
 		});
 };
-var _user$project$GuiView$mainContainer = function (model) {
+var _user$project$GuiView$rightContainer = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$div,
+				_elm_lang$html$Html$h2,
 				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(model.title),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$GuiView$mainContainer = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('ui grid'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('three wide column'),
+					_1: {ctor: '[]'}
+				},
 				{
 					ctor: '::',
 					_0: _user$project$GuiView$sideBar(model),
@@ -8364,8 +8396,16 @@ var _user$project$GuiView$mainContainer = function (model) {
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					{ctor: '[]'}),
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('nine wide column'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _user$project$GuiView$rightContainer(model),
+						_1: {ctor: '[]'}
+					}),
 				_1: {ctor: '[]'}
 			}
 		});
@@ -8408,7 +8448,11 @@ var _user$project$Main$validateDFA = function (dfa) {
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class(''),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: _user$project$GuiView$mainContainer(model),
