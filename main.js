@@ -8276,6 +8276,104 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
 
+var _user$project$DFA$update = F2(
+	function (msg, model) {
+		return model;
+	});
+var _user$project$DFA$validateTransition = F2(
+	function (transition, dfa) {
+		var valide = A2(_elm_lang$core$List$member, transition.e, dfa.e);
+		var validq2 = A2(_elm_lang$core$List$member, transition.q2, dfa.q);
+		var validq = A2(_elm_lang$core$List$member, transition.q, dfa.q);
+		return validq && (validq2 && valide);
+	});
+var _user$project$DFA$validateEndDFA = function (dfa) {
+	var finalStates = _elm_lang$core$Set$fromList(dfa.f);
+	var allStates = _elm_lang$core$Set$fromList(dfa.q);
+	return _elm_lang$core$Native_Utils.eq(
+		A2(_elm_lang$core$Set$intersect, allStates, finalStates),
+		finalStates);
+};
+var _user$project$DFA$validateStartDFA = function (dfa) {
+	return A2(_elm_lang$core$List$member, dfa.s, dfa.q);
+};
+var _user$project$DFA$validList = function (list) {
+	return !A2(_elm_lang$core$List$member, false, list);
+};
+var _user$project$DFA$validateTranFunctions = function (dfa) {
+	var validate = function (x) {
+		return A2(_user$project$DFA$validateTransition, x, dfa);
+	};
+	return _user$project$DFA$validList(
+		A2(_elm_lang$core$List$map, validate, dfa.a));
+};
+var _user$project$DFA$validateDFA = function (dfa) {
+	return true;
+};
+var _user$project$DFA$automaton = {
+	q: {
+		ctor: '::',
+		_0: 's0',
+		_1: {
+			ctor: '::',
+			_0: 's1',
+			_1: {
+				ctor: '::',
+				_0: 's2',
+				_1: {
+					ctor: '::',
+					_0: 's3',
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	},
+	e: {
+		ctor: '::',
+		_0: _elm_lang$core$Native_Utils.chr('0'),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$core$Native_Utils.chr('1'),
+			_1: {ctor: '[]'}
+		}
+	},
+	s: 's1',
+	f: {
+		ctor: '::',
+		_0: 's1',
+		_1: {
+			ctor: '::',
+			_0: 's2',
+			_1: {ctor: '[]'}
+		}
+	},
+	a: {
+		ctor: '::',
+		_0: {
+			q: 's0',
+			e: _elm_lang$core$Native_Utils.chr('1'),
+			q2: 's2'
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				q: 's0',
+				e: _elm_lang$core$Native_Utils.chr('1'),
+				q2: 's2'
+			},
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _user$project$DFA$Automata = F5(
+	function (a, b, c, d, e) {
+		return {q: a, e: b, a: c, s: d, f: e};
+	});
+var _user$project$DFA$Transition = F3(
+	function (a, b, c) {
+		return {q: a, e: b, q2: c};
+	});
+
 var _user$project$GuiView$textInput = A2(
 	_elm_lang$html$Html$input,
 	{ctor: '[]'},
@@ -8304,6 +8402,115 @@ var _user$project$GuiView$tabs = function (labels) {
 		},
 		A2(_elm_lang$core$List$map, _user$project$GuiView$tab, labels));
 };
+var _user$project$GuiView$inputButton = F2(
+	function (placeholderText, buttonText) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('ui action input'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$placeholder(placeholderText),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('ui button'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(buttonText),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$GuiView$labeledInput = function (labelText) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('ui form'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('field'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$label,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(labelText),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$input,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_('text'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$placeholder(labelText),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$GuiView$simpleInput = function (placeholderText) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('ui input'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$input,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$type_('text'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$placeholder(placeholderText),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$GuiView$dfaView = A2(
 	_elm_lang$html$Html$div,
 	{ctor: '[]'},
@@ -8319,15 +8526,12 @@ var _user$project$GuiView$dfaView = A2(
 			}),
 		_1: {
 			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$input,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$placeholder('Current Word'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {ctor: '[]'}
+			_0: _user$project$GuiView$labeledInput('Current Word'),
+			_1: {
+				ctor: '::',
+				_0: A2(_user$project$GuiView$inputButton, 'S1', 'Add State'),
+				_1: {ctor: '[]'}
+			}
 		}
 	});
 var _user$project$GuiView$sideBar = function (model) {
@@ -8384,12 +8588,19 @@ var _user$project$GuiView$mainContainer = function (model) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('three wide column'),
+					_0: _elm_lang$html$Html_Attributes$class('sixteen wide column'),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
-					_0: _user$project$GuiView$sideBar(model),
+					_0: A2(
+						_elm_lang$html$Html$h1,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Automaton Simulator'),
+							_1: {ctor: '[]'}
+						}),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -8398,53 +8609,34 @@ var _user$project$GuiView$mainContainer = function (model) {
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('nine wide column'),
+						_0: _elm_lang$html$Html_Attributes$class('four wide column'),
 						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
-						_0: _user$project$GuiView$rightContainer(model),
+						_0: _user$project$GuiView$sideBar(model),
 						_1: {ctor: '[]'}
 					}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('twelve wide column'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$GuiView$rightContainer(model),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
 
-var _user$project$Main$update = F2(
-	function (msg, model) {
-		return model;
-	});
-var _user$project$Main$validateTransition = F2(
-	function (transition, dfa) {
-		var valide = A2(_elm_lang$core$List$member, transition.e, dfa.e);
-		var validq2 = A2(_elm_lang$core$List$member, transition.q2, dfa.q);
-		var validq = A2(_elm_lang$core$List$member, transition.q, dfa.q);
-		return validq && (validq2 && valide);
-	});
-var _user$project$Main$validateEndDFA = function (dfa) {
-	var finalStates = _elm_lang$core$Set$fromList(dfa.f);
-	var allStates = _elm_lang$core$Set$fromList(dfa.q);
-	return _elm_lang$core$Native_Utils.eq(
-		A2(_elm_lang$core$Set$intersect, allStates, finalStates),
-		finalStates);
-};
-var _user$project$Main$validateStartDFA = function (dfa) {
-	return A2(_elm_lang$core$List$member, dfa.s, dfa.q);
-};
-var _user$project$Main$validList = function (list) {
-	return !A2(_elm_lang$core$List$member, false, list);
-};
-var _user$project$Main$validateTranFunctions = function (dfa) {
-	var validate = function (x) {
-		return A2(_user$project$Main$validateTransition, x, dfa);
-	};
-	return _user$project$Main$validList(
-		A2(_elm_lang$core$List$map, validate, dfa.a));
-};
-var _user$project$Main$validateDFA = function (dfa) {
-	return true;
-};
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -8460,71 +8652,8 @@ var _user$project$Main$view = function (model) {
 		});
 };
 var _user$project$Main$model = {title: 'DFA - Deterministic Finite Automata'};
-var _user$project$Main$automaton = {
-	q: {
-		ctor: '::',
-		_0: 's0',
-		_1: {
-			ctor: '::',
-			_0: 's1',
-			_1: {
-				ctor: '::',
-				_0: 's2',
-				_1: {
-					ctor: '::',
-					_0: 's3',
-					_1: {ctor: '[]'}
-				}
-			}
-		}
-	},
-	e: {
-		ctor: '::',
-		_0: _elm_lang$core$Native_Utils.chr('0'),
-		_1: {
-			ctor: '::',
-			_0: _elm_lang$core$Native_Utils.chr('1'),
-			_1: {ctor: '[]'}
-		}
-	},
-	s: 's1',
-	f: {
-		ctor: '::',
-		_0: 's1',
-		_1: {
-			ctor: '::',
-			_0: 's2',
-			_1: {ctor: '[]'}
-		}
-	},
-	a: {
-		ctor: '::',
-		_0: {
-			q: 's0',
-			e: _elm_lang$core$Native_Utils.chr('1'),
-			q2: 's2'
-		},
-		_1: {
-			ctor: '::',
-			_0: {
-				q: 's0',
-				e: _elm_lang$core$Native_Utils.chr('1'),
-				q2: 's2'
-			},
-			_1: {ctor: '[]'}
-		}
-	}
-};
 var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
-	{model: _user$project$Main$model, view: _user$project$Main$view, update: _user$project$Main$update})();
-var _user$project$Main$Automata = F5(
-	function (a, b, c, d, e) {
-		return {q: a, e: b, a: c, s: d, f: e};
-	});
-var _user$project$Main$Transition = F3(
-	function (a, b, c) {
-		return {q: a, e: b, q2: c};
-	});
+	{model: _user$project$Main$model, view: _user$project$Main$view, update: _user$project$DFA$update})();
 var _user$project$Main$NoMsg = {ctor: 'NoMsg'};
 
 var Elm = {};

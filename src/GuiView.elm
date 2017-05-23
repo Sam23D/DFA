@@ -6,9 +6,10 @@ import Html.Attributes exposing(..)
 mainContainer model =
   div
   [ class "ui grid" ]
-  [ div[ class "three wide column" ]
+  [ div [ class "sixteen wide column"][ h1[][ text "Automaton Simulator"] ] 
+  ,div[ class "four wide column" ]
     [ sideBar model ]
-  , div[ class "nine wide column"] 
+  , div[ class "twelve wide column"] 
     [ rightContainer model ]
   ]
   
@@ -32,9 +33,33 @@ dfaView =
   div
   [ ]
   [ h4[][ text "Deterministic Finite Automaton"]
-  , input [ placeholder "Current Word" ] [ ]
+  , labeledInput "Current Word"
+  , inputButton "S1" "Add State"
   ]
-  
+
+{- INPUTS -}
+simpleInput placeholderText =
+  div
+    [ class "ui input" ]
+    [ input [ type_ "text",  placeholder placeholderText ][ ]
+    ]
+
+labeledInput labelText = 
+  div
+  [ class "ui form" ]
+  [ div
+        [ class "field" ]
+        [ label [][ text labelText] 
+        , input [ type_ "text",  placeholder labelText ][ ]
+        ]
+  ]
+inputButton placeholderText buttonText =
+  div
+    [ class "ui action input" ]
+    [ input [ placeholder placeholderText ][]
+    , button [ class "ui button"][ text buttonText]
+    ]
+
 {- TABS -}
 
 tabs labels =

@@ -1,37 +1,3 @@
-var _user$project$Main$update = F2(
-	function (msg, model) {
-		return model;
-	});
-var _user$project$Main$validateTransition = F2(
-	function (transition, dfa) {
-		var valide = A2(_elm_lang$core$List$member, transition.e, dfa.e);
-		var validq2 = A2(_elm_lang$core$List$member, transition.q2, dfa.q);
-		var validq = A2(_elm_lang$core$List$member, transition.q, dfa.q);
-		return validq && (validq2 && valide);
-	});
-var _user$project$Main$validateEndDFA = function (dfa) {
-	var finalStates = _elm_lang$core$Set$fromList(dfa.f);
-	var allStates = _elm_lang$core$Set$fromList(dfa.q);
-	return _elm_lang$core$Native_Utils.eq(
-		A2(_elm_lang$core$Set$intersect, allStates, finalStates),
-		finalStates);
-};
-var _user$project$Main$validateStartDFA = function (dfa) {
-	return A2(_elm_lang$core$List$member, dfa.s, dfa.q);
-};
-var _user$project$Main$validList = function (list) {
-	return !A2(_elm_lang$core$List$member, false, list);
-};
-var _user$project$Main$validateTranFunctions = function (dfa) {
-	var validate = function (x) {
-		return A2(_user$project$Main$validateTransition, x, dfa);
-	};
-	return _user$project$Main$validList(
-		A2(_elm_lang$core$List$map, validate, dfa.a));
-};
-var _user$project$Main$validateDFA = function (dfa) {
-	return true;
-};
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -47,69 +13,6 @@ var _user$project$Main$view = function (model) {
 		});
 };
 var _user$project$Main$model = {title: 'DFA - Deterministic Finite Automata'};
-var _user$project$Main$automaton = {
-	q: {
-		ctor: '::',
-		_0: 's0',
-		_1: {
-			ctor: '::',
-			_0: 's1',
-			_1: {
-				ctor: '::',
-				_0: 's2',
-				_1: {
-					ctor: '::',
-					_0: 's3',
-					_1: {ctor: '[]'}
-				}
-			}
-		}
-	},
-	e: {
-		ctor: '::',
-		_0: _elm_lang$core$Native_Utils.chr('0'),
-		_1: {
-			ctor: '::',
-			_0: _elm_lang$core$Native_Utils.chr('1'),
-			_1: {ctor: '[]'}
-		}
-	},
-	s: 's1',
-	f: {
-		ctor: '::',
-		_0: 's1',
-		_1: {
-			ctor: '::',
-			_0: 's2',
-			_1: {ctor: '[]'}
-		}
-	},
-	a: {
-		ctor: '::',
-		_0: {
-			q: 's0',
-			e: _elm_lang$core$Native_Utils.chr('1'),
-			q2: 's2'
-		},
-		_1: {
-			ctor: '::',
-			_0: {
-				q: 's0',
-				e: _elm_lang$core$Native_Utils.chr('1'),
-				q2: 's2'
-			},
-			_1: {ctor: '[]'}
-		}
-	}
-};
 var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
-	{model: _user$project$Main$model, view: _user$project$Main$view, update: _user$project$Main$update})();
-var _user$project$Main$Automata = F5(
-	function (a, b, c, d, e) {
-		return {q: a, e: b, a: c, s: d, f: e};
-	});
-var _user$project$Main$Transition = F3(
-	function (a, b, c) {
-		return {q: a, e: b, q2: c};
-	});
+	{model: _user$project$Main$model, view: _user$project$Main$view, update: _user$project$DFA$update})();
 var _user$project$Main$NoMsg = {ctor: 'NoMsg'};
